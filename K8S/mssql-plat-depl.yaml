@@ -1,0 +1,63 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mssql-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mssql
+  template:
+    metadata:
+      labels:
+        app: mssql
+    spec:
+      containers:
+        - name: mssql
+          image: mcr.microsoft.com/mssql/server:2019-latest #Use the latest SQL Server docker image from docker hub.
+          ports:
+            - containerPort: 1433
+          env:
+          - name: MSSQL_PID
+            value: "Express" #Use the express edition of SQL Server.
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: SA_PASSWORD #This is the key in the command used to set up the secret username password key value pair.
+            valueFrom:
+              secretKeyRef:
+                name: mssql #This is the name of the secret, created using the command. This is the way to get the value of the secret, which is the password.
+                key: SA_PASSWORD
+          volumeMounts:
+          - mountPath: /var/opt/mssql/
+            name: mssqldb
+      volumes:
+      - name: mssqldb
+        persistentVolumeClaim:
+          claimName: mssql-claim #This refers to the name of the persistence volume claim created in the local-pvc.yaml file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: mssql
+  ports:
+  - name: mssql
+    protocol: TCP
+    port: 1433
+    targetPort: 1433
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: mssql
+  ports:
+  - protocol: TCP
+    port: 1433
+    targetPort: 1433
