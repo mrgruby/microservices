@@ -25,7 +25,7 @@ spec:
           - name: SA_PASSWORD #This is the key in the command used to set up the secret username password key value pair.
             valueFrom:
               secretKeyRef:
-                name: mssql #This is the name of the secret, created using the command. This is the way to get the value of the secret, which is the password.
+                name: mssql2 #This is the name of the secret, created using the command. This is the way to get the value of the secret, which is the password.
                 key: SA_PASSWORD
           volumeMounts:
           - mountPath: /var/opt/mssql/
