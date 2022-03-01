@@ -1,42 +1,60 @@
 ﻿using CommandsService.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommandsService.Data
 {
     public class CommandsRepo : ICommandsRepo
     {
-        public void CreateCommand(int platformId, Command command)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly AppDbContext _context;
 
-        public void CreatePlatform(Platform plaform)
+        public CommandsRepo(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
+        //Commands
 
-        public IEnumerable<Platform> GetAllPlatforms()
+        public Command GetCommand(int platformId, int commandId)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Command> GetCommand(int platformId, int commandId)
-        {
-            throw new NotImplementedException();
+            return _context.Commands.FirstOrDefault(c => c.Id == commandId && c.PlatformId == platformId);
         }
 
         public IEnumerable<Command> GetCommandsForPlatform(int platformId)
         {
-            throw new NotImplementedException();
+            return _context.Commands.Where(c => c.PlatformId == platformId).ToList();
+        }
+
+        public void CreateCommand(int platformId, Command command)
+        {
+            if (command == null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+            command.PlatformId = platformId;
+            _context.Add(command);
+        }
+
+        //Platforms
+
+        public void CreatePlatform(Platform platform)
+        {
+            if (platform == null)
+                throw new ArgumentNullException(nameof(platform));
+            _context.Add(platform);
+        }
+
+        public IEnumerable<Platform> GetAllPlatforms()
+        {
+            return _context.Platforms.ToList();
         }
 
         public bool PlatformExists(int platformId)
         {
-            throw new NotImplementedException();
+            return _context.Platforms.Any(p => p.Id == platformId);
         }
 
         public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            return _context.SaveChanges() >= 0;
         }
     }
 }
