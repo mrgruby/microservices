@@ -34,7 +34,8 @@ namespace PlatformService.SyncDataServices.Http
                 Encoding.UTF8,
                 "application/json"
                 );
-            //Call the TestInboundConnection Action method in the CommandService's PlatformsController, using the path in the appsettings file
+            //Call the TestInboundConnection Action method in the CommandService's PlatformsController, using the path in the appsettings file,
+            //Which is a post to http://commands-clusterip-srv:80/api/c/platforms/
             var response = await _httpClient.PostAsync($"{_config["CommandService"]}", httpContent);
 
             if (response.IsSuccessStatusCode)
