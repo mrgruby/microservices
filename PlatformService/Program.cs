@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PlatformService.AsyncDataServices;
 using PlatformService.Data;
 using PlatformService.SyncDataServices.Http;
 
@@ -24,6 +25,7 @@ builder.Services.AddSwaggerGen();
 //}
 
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
+builder.Services.AddScoped<IMessageBusClient, MessageBusClient>();
 
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 
