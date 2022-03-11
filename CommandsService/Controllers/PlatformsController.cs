@@ -19,6 +19,7 @@ namespace CommandsService.Controllers
             _mapper = mapper;
         }
 
+        //http://localhost:5119/api/c/platforms/
         [HttpGet]
         public ActionResult<IEnumerable<PlatformReadDto>>GetPlatforms()
         {
@@ -26,6 +27,12 @@ namespace CommandsService.Controllers
             return Ok(_mapper.Map<IEnumerable<PlatformReadDto>>(platforms));
         }
 
+        /// <summary>
+        ///This is called from the CreatePlatform action in the Platform service, using the HttpClient
+        ///This demonstrates the two services communicating internally
+        /// http://localhost:5119/api/c/platforms/
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult TestInboundConnection()
         {

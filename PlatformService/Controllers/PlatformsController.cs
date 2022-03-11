@@ -53,6 +53,8 @@ namespace PlatformService.Controllers
             _repo.CreatePlatform(platform);
             _repo.SaveChanges();
 
+            //Map to a PlatformReadDto. This will be used to send to the commandservice, using the messagebus. It will also
+            //be used to return according to the REST rules
             var platformReadDto = _mapper.Map<PlatformReadDto>(platform);
 
             //Send Sync
