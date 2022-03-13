@@ -74,6 +74,8 @@ namespace PlatformService.Controllers
                 //Call PlatformsController asyncronously in CommandService, and send the newly created platform to it.
                 //This will be using the RabbitMQ MessageBus
                 var platformPublishedDto = _mapper.Map<PlatformPublishedDto>(platformReadDto);
+
+                //Set the name of the event. This will be used by the EventProcessor in the CommandsService.
                 platformPublishedDto.Event = "Platform_Published";
                 _messageBusClient.PublishNewPlatform(platformPublishedDto);
 
