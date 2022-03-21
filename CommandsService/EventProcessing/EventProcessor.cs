@@ -25,7 +25,7 @@ namespace CommandsService.EventProcessing
             switch (eventType)
             {
                 case EventType.PlatformPublished:
-                    //Console.WriteLine("--> Platform published - EventdDetermined.");
+                    AddPlatform(message);
                     break;
                 default:
                     //Console.WriteLine("--> Could not determine the event type.");
@@ -65,6 +65,7 @@ namespace CommandsService.EventProcessing
                     {
                         repo.CreatePlatform(plat);
                         repo.SaveChanges();
+                        Console.WriteLine("--> Platform added.");
                     }
                     else
                     {

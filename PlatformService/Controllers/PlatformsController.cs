@@ -46,6 +46,11 @@ namespace PlatformService.Controllers
             return Ok(_mapper.Map<PlatformReadDto>(res));
         }
 
+        /// <summary>
+        /// When creating a new platform, it will be sent to the CommandsService via RabbitMQ MessageBus
+        /// </summary>
+        /// <param name="platformCreateDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<PlatformReadDto>>CreatePlatform(PlatformCreateDto platformCreateDto)
         {

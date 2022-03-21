@@ -53,6 +53,10 @@ namespace PlatformService.AsyncDataServices
             }
         }
 
+        /// <summary>
+        /// Do the actual publishing to RabbitMQ
+        /// </summary>
+        /// <param name="message"></param>
         private void SendMessage(string message)
         {
             var body = Encoding.UTF8.GetBytes(message);
