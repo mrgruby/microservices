@@ -17,7 +17,7 @@ spec:
           image: mrgruby/platformservice:latest
 
 ---
-#This is the cluster ip service which is used in Kubernetes to communicate with the
+#This is the cluster ip service which is used in Kubernetes for internal communication between the different microservices.
 apiVersion: v1
 kind: Service
 metadata:

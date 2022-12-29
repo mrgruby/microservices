@@ -22,6 +22,7 @@ namespace CommandsService.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CommandReadDto>>GetCommandsForPlatform(int platformId)
         {
+            Console.WriteLine($"--> Hitting GetCommandsForPlatform with platformId: {platformId}");
             //Check if the platform exists...
             if (!_repo.PlatformExists(platformId))
                 return NotFound();
@@ -62,9 +63,10 @@ namespace CommandsService.Controllers
             _repo.CreateCommand(platformId, command);
             _repo.SaveChanges();
 
-            var commandReadDto = _mapper.Map<CommandReadDto>(command);//At this point, the command has a valid id, becaus it has been saved by _repo.SaveChanges()
+            var commandReadDto = _mapper.Map<CommandReadDto>(command);
+            //At this point, "command" has a valid id, because it has been saved by _repo.SaveChanges()
 
-            //Create a CreatedAtRouteResult, that also contins a URL to the newly created resource.
+            //Create a CreatedAtRouteResult, that also contains a URL to the newly created resource.
             return CreatedAtRoute(nameof(GetCommandForPlatform),
                 new { platformId = platformId, commandId = commandReadDto.Id }, commandReadDto);
         }

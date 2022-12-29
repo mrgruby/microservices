@@ -16,6 +16,7 @@ namespace CommandsService.Data
         //Set up explicit relationship between the entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //This isn't really necessary, since EF does that pretty well using navigation properties in the models....
             modelBuilder
                 .Entity<Platform>()
                 .HasMany(p => p.Commands)

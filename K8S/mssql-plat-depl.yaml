@@ -1,4 +1,5 @@
-﻿apiVersion: apps/v1
+﻿#This is for deploying a SQL server in Kubernetes for the PlatformService
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mssql-depl
@@ -25,7 +26,7 @@ spec:
           - name: SA_PASSWORD #This is the key in the command used to set up the secret username password key value pair.
             valueFrom:
               secretKeyRef:
-                name: mssql2 #This is the name of the secret, created using the command. This is the way to get the value of the secret, which is the password.
+                name: mssql #This is the name of the secret, created using the command. This is the way to get the value of the secret, which is the password.
                 key: SA_PASSWORD
           volumeMounts:
           - mountPath: /var/opt/mssql/
@@ -49,6 +50,8 @@ spec:
     port: 1433
     targetPort: 1433
 ---
+#This is to be able to connect directly to the SQL server from outside the cluster, kinda like with the node port for the PlatformService.
+#It is not necessary, and it is not on the architecture diagramme, but it can serve a purpose.
 apiVersion: v1
 kind: Service
 metadata:

@@ -6,6 +6,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
+#Here we define the routes from outside requests, to the services running inside kubernetes
   rules:
     - host: acme.com
       http:

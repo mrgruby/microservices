@@ -15,13 +15,13 @@ builder.Services.AddSwaggerGen();
 
 //if (app.Environment.IsProduction())
 //{
-    Console.WriteLine("--> Using Sql Server Database");
-    builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("PlatformsConn")));
+Console.WriteLine("--> Using Sql Server Database");
+builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("PlatformsConn")));
 //}
 //else
 //{
-//    Console.WriteLine("--> Using InMem Database");
-//    builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+//Console.WriteLine("--> Using InMem Database");
+//builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
 //}
 
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();

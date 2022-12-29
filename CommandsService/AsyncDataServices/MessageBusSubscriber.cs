@@ -8,7 +8,8 @@ namespace CommandsService.AsyncDataServices
 {
     /// <summary>
     /// This will run in the background, and listen to incoming PlatformService messages (events) from the RabbitMQ MessageBus
-    /// MessageBusSubscriber will be registered in Startup.cs as a HostedService, and when it starts, ExecuteAsync will run and start to listen for events.
+    /// MessageBusSubscriber will be registered in Startup.cs as a HostedService, and when it starts, 
+    /// ExecuteAsync will run and start to listen for events.
     /// </summary>
     public class MessageBusSubscriber : BackgroundService
     {

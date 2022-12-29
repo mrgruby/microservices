@@ -1,3 +1,4 @@
+#When this file is added (kubectl apply -f ....) it will generate an external port (ex. 31230) which is used to make calls to the microservices
 apiVersion: v1
 kind: Service
 metadata:
