@@ -57,6 +57,8 @@ namespace CommandsService.AsyncDataServices
                 var body = ea.Body;
                 var notificationMessage = Encoding.UTF8.GetString(body.ToArray());
 
+                //notificationMessage is the actual platform object as a string.
+                //It will be serialized and added to the database by the event processor.
                 _eventProcessor.ProcessEvent(notificationMessage);
             };
 

@@ -21,8 +21,8 @@ namespace PlatformService.Controllers
         {
             _repo = repo;
             _mapper = mapper;
-            _commandDataClient = commandDataClient;//This will be used to communicate with the CommandService Microservice.
-            _messageBusClient = messageBusClient;//This will be used to communicate with the CommandService Microservice, using the RabbitMQ MessageBus.
+            _commandDataClient = commandDataClient;//This will be used to communicate syncronously with the CommandService Microservice.
+            _messageBusClient = messageBusClient;//This will be used to communicate asyncronously with the CommandService Microservice, using the RabbitMQ MessageBus.
         }
 
         //http://localhost:5278/api/platforms

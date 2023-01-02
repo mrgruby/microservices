@@ -16,7 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICommandsRepo, CommandsRepo>();
 builder.Services.AddSingleton<IEventProcessor, EventProcessor>();
-//builder.Services.AddHostedService<MessageBusSubscriber>();
+builder.Services.AddHostedService<MessageBusSubscriber>();
 
 var app = builder.Build();
 

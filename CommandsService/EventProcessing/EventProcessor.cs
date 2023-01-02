@@ -13,7 +13,7 @@ namespace CommandsService.EventProcessing
 
         public EventProcessor(IServiceScopeFactory scopeFactory, IMapper mapper)
         {
-            //This will be used to get e reference to the repository. We cannot use standard ctor DI to do this!
+            //This will be used to get a reference to the repository. We cannot use standard ctor DI to do this!
             _scopeFactory = scopeFactory;
             _mapper = mapper;
         }
@@ -37,6 +37,7 @@ namespace CommandsService.EventProcessing
         {
             Console.WriteLine("--> Determining the event...");
 
+            //De-serialize to a GenericEventDto object, so we can read the Event property to see what type of event we are dealing with.
             var eventType = JsonSerializer.Deserialize<GenericEventDto>(notificationMessage);
 
             switch (eventType.Event)
