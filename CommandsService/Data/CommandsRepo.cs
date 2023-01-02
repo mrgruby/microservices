@@ -43,6 +43,10 @@ namespace CommandsService.Data
             _context.Add(platform);
         }
 
+        /// <summary>
+        /// This will be used by Grpc to get all platforms from the PlatformsService to the CommandsService.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Platform> GetAllPlatforms()
         {
             return _context.Platforms.ToList();
