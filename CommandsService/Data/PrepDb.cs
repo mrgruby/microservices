@@ -14,6 +14,7 @@ namespace CommandsService.Data
             //We need this because we can't use constructor DI in a static class
             using (var serviceScope = appBuilder.ApplicationServices.CreateScope())
             {
+                //Create an instance of the PlatformDataClient.
                 var grpcServiceClient = serviceScope.ServiceProvider.GetService<IPlatformDataClient>();
 
                 var platforms = grpcServiceClient.ReturnAllPlatforms();
